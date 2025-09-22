@@ -5,28 +5,20 @@
   <link rel="stylesheet" type="text/css" href="/style.css">
   
   <script>
-
-  </script>
-</head>
-<body>
-  <section id="top">
-    <h3>Status Code Tests</h3>
-    <select id="page">
-      <option value="/success">Success</option>
-      <option value="/badRequest">Bad Request</option>
-      <option value="/unauthorized">Unauthorized</option>
-      <option value="/forbidden">Forbidden</option>
-      <option value="/internal">Internal</option>
-      <option value="/notImplemented">Not Implemented</option>
-      <option value="/notFound">Not Found</option>
-    </select>
-    <select id="type">
-      <option value="application/json">JSON</option>
-      <option value="text/xml">XML</option>
-    </select>
-    <button id="send">Send</button>
-  </section>
-  <section id="content">
-  </section>
-</body>
-</html>
+    const handleResponse = (response) => {
+      const page = document.getElementById('page');
+      page.innerHTML = `<h3>Status Code: ${response.status}</h3><pre>${JSON.stringify(response, null, 2)}</pre>`;
+    };
+    const sendFetch = (url, type) => {
+      fetch(url, { headers: { 'Accept': type } })
+        .then(handleResponse)
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    };
+    const init = () => {
+      const successButton = document.querySelector("#success");
+      const badRequestButton = document.querySelector("#badRequest");
+      const unauthorizedButton = document.querySelector("#unauthorized");
+      const forbiddenButton = document.querySelector("#forbidden");
+      const
